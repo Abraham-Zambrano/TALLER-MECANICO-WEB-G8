@@ -1,1 +1,14 @@
-<p>header works!</p>
+<mat-toolbar color="primary">
+  <span>Taller Mecánico G8</span>
+  <span class="spacer"></span>
+  
+  <ng-container *ngIf="authService.getCurrentUser(); else notLoggedIn">
+    <span class="user-name">Bienvenido, {{ authService.getCurrentUser().name }}</span>
+    <button mat-button (click)="logout()">Cerrar Sesión</button>
+  </ng-container>
+  
+  <ng-template #notLoggedIn>
+    <button mat-button routerLink="/about">Acerca de</button>
+    <button mat-button routerLink="/login">Iniciar Sesión</button>
+  </ng-template>
+</mat-toolbar>
