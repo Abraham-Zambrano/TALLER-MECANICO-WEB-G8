@@ -1,24 +1,27 @@
-// login.component.ts
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../src/auth.service';
+import { AuthService } from '../.././auth.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
+    FormsModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    FormsModule,
-    MatSnackBarModule
+    MatDividerModule,
+    MatProgressSpinnerModule, //
+    MatIconModule // <
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -26,19 +29,32 @@ import { AuthService } from '../../../src/auth.service';
 export class LoginComponent {
   username: string = '';
   password: string = '';
+  errorMessage: string | null = null;
+  isLoading: boolean = false;
 
   constructor(
     private authService: AuthService,
-    private snackBar: MatSnackBar,
     private router: Router
   ) {}
 
   onSubmit(): void {
-    if (this.authService.login(this.username, this.password)) {
-      this.snackBar.open('Acceso concedido', 'Cerrar', { duration: 3000 });
-      this.router.navigate(['/home']);
-    } else {
-      this.snackBar.open('Error en credenciales', 'Cerrar', { duration: 3000 });
+    this.errorMessage = null;
+    
+    if (!this.username || !this.password) {
+      this.errorMessage = 'Por favor ingrese usuario y contraseña';
+      return;
     }
+
+    this.isLoading = true;
+    
+    // Simulamos un delay para la autenticación
+    setTimeout(() => {
+      if (this.authService.login(this.username, this.password)) {
+        this.router.navigate(['/home']);
+      } else {
+        this.errorMessage = 'Credenciales incorrectas';
+      }
+      this.isLoading = false;
+    }, 1000);
   }
 }
