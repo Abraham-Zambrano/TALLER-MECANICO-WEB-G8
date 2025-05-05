@@ -1,0 +1,44 @@
+<!-- cliente-dialog.component.html -->
+<h1 mat-dialog-title>{{ data.modo === 'crear' ? 'Nuevo Cliente' : 'Editar Cliente' }}</h1>
+<div mat-dialog-content>
+  <form (ngSubmit)="onSave()">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre completo</mat-label>
+      <input matInput [(ngModel)]="cliente.nombre" name="nombre" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Vehículo</mat-label>
+      <mat-select [(ngModel)]="cliente.vehiculo" name="vehiculo" required>
+        <mat-option *ngFor="let v of vehiculos" [value]="v">{{v}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Modelo</mat-label>
+      <input matInput [(ngModel)]="cliente.modelo" name="modelo" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Placa</mat-label>
+      <input matInput [(ngModel)]="cliente.placa" name="placa" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Teléfono</mat-label>
+      <input matInput [(ngModel)]="cliente.telefono" name="telefono" required type="tel">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Última visita</mat-label>
+      <input matInput [(ngModel)]="cliente.ultimaVisita" name="ultimaVisita" type="date" required>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="onSave()" 
+          [disabled]="!formularioValido()">
+    {{ data.modo === 'crear' ? 'Crear' : 'Guardar' }}
+  </button>
+</div>
