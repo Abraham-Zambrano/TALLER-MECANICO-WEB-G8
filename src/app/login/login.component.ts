@@ -9,19 +9,21 @@ import { Router } from '@angular/router';
 import { AuthService } from '../.././auth.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     FormsModule,
+    CommonModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatDividerModule,
-    MatProgressSpinnerModule, //
-    MatIconModule // <
+    MatProgressSpinnerModule, 
+    MatIconModule 
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -47,7 +49,6 @@ export class LoginComponent {
 
     this.isLoading = true;
     
-    // Simulamos un delay para la autenticación
     setTimeout(() => {
       if (this.authService.login(this.username, this.password)) {
         this.router.navigate(['/home']);
