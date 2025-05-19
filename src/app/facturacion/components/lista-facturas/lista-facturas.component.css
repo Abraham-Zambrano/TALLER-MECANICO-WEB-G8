@@ -1,0 +1,50 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  .action-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-field {
+    width: 300px;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  .estado-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  .estado-badge.pendiente {
+    background-color: #fff3e0;
+    color: #e65100;
+  }
+  
+  .estado-badge.pagada {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+  }
+  
+  .estado-badge.anulada {
+    background-color: #ffebee;
+    color: #c62828;
+  }
