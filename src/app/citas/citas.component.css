@@ -1,0 +1,17 @@
+.spacer {
+    flex: 1 1 auto;
+  }
+  
+  .boton-ancho {
+    min-width: 100px;
+    padding: 8px 16px;
+    font-size: 14px;
+    margin-left: 10px;
+  }
+  
+  table.mat-table {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+    
