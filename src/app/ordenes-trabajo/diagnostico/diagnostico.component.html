@@ -1,0 +1,50 @@
+
+<div class="actions">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Filtrar diagnósticos</mat-label>
+      <input matInput ngModelGroup="filtro" placeholder="Buscar por vehículo, síntomas, observaciones, partes o recomendaciones">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="nuevoDiagnostico()">+ Nuevo Diagnóstico</button>
+  </div>
+  
+  <div *ngFor="let diagnostico of diagnosticosFiltrados" class="diagnostico-card">
+    <mat-card>
+      <mat-card-title>{{ diagnostico.vehiculo }}</mat-card-title>
+      <mat-card-subtitle>{{ diagnostico.sintomas }}</mat-card-subtitle>
+      <mat-card-content>
+        <p><strong>Observaciones:</strong> {{ diagnostico.observaciones }}</p>
+        <p><strong>Partes Afectadas:</strong> {{ diagnostico.partesAfectadas }}</p>
+        <p><strong>Recomendaciones:</strong> {{ diagnostico.recomendaciones }}</p>
+      </mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions>
+        <button mat-button color="accent" (click)="editarDiagnostico(diagnostico)">Editar</button>
+        <button mat-button color="warn" (click)="eliminarDiagnostico(diagnostico)">Eliminar</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  
+  <form [formGroup]="diagnosticoForm" (ngSubmit)="guardar()" class="diagnostico-form">
+    <mat-form-field class="full-width">
+      <mat-label>Vehículo</mat-label>
+      <input matInput formControlName="vehiculo">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Síntomas</mat-label>
+      <input matInput formControlName="sintomas">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Observaciones</mat-label>
+      <textarea matInput formControlName="observaciones"></textarea>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Partes Afectadas</mat-label>
+      <input matInput formControlName="partesAfectadas">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Recomendaciones</mat-label>
+      <textarea matInput formControlName="recomendaciones"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Guardar</button>
+  </form>
+  
