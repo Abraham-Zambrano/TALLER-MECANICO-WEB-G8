@@ -1,0 +1,40 @@
+
+<h2 mat-dialog-title>{{ datos.id ? 'Editar Cita' : 'Nueva Cita' }}</h2>
+<mat-dialog-content>
+  <mat-form-field style="width: 100%;">
+    <mat-label>Cliente</mat-label>
+    <input matInput [(ngModel)]="datos.cliente">
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <mat-label>Fecha</mat-label>
+    <input matInput type="date" [(ngModel)]="datos.fecha">
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <mat-label>Hora</mat-label>
+    <input matInput type="time" [(ngModel)]="datos.hora">
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <mat-label>Servicio</mat-label>
+    <input matInput [(ngModel)]="datos.servicio">
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <mat-label>Técnico</mat-label>
+    <input matInput [(ngModel)]="datos.tecnico">
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <mat-label>Estado</mat-label>
+    <mat-select [(ngModel)]="datos.estado">
+      <mat-option style="background-color: white;" *ngFor="let estado of estadoOptions" [value]="estado">{{ estado }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button mat-button color="primary" (click)="guardar()">Guardar</button>
+</mat-dialog-actions>
