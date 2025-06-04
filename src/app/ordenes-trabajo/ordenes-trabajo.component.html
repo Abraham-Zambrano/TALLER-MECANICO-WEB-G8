@@ -1,1 +1,48 @@
-<p>ordenes-trabajo works!</p>
+
+<div class="actions">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Filtrar Ordenes</mat-label>
+      <input matInput [(ngModel)]="filtro" placeholder="Buscar por vehículo, diagnóstico, mecánico o estado">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="nuevaOrden()">+ Nueva Orden</button>
+  </div>
+  
+  <div *ngFor="let orden of ordenesFiltradas" class="orden-card">
+    <mat-card>
+      <mat-card-title>{{ orden.vehiculo }}</mat-card-title>
+      <mat-card-subtitle>{{ orden.diagnostico }} - {{ orden.estado }}</mat-card-subtitle>
+      <mat-card-content>
+        <p><strong>Mecanico:</strong> {{ orden.mecanico }}</p>
+        <p><strong>Fecha:</strong> {{ orden.fechaCreacion }}</p>
+        <p><strong>Observaciones:</strong> {{ orden.observaciones || 'Sin observaciones' }}</p>
+      </mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions>
+        <button mat-button color="accent" (click)="editarOrden(orden)">Editar</button>
+        <button mat-button color="warn" (click)="eliminarOrden(orden)">Eliminar</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  
+  <form [formGroup]="ordenForm" (ngSubmit)="guardar()" class="orden-form">
+    <mat-form-field class="full-width">
+      <mat-label>Vehiculo</mat-label>
+      <input matInput formControlName="vehiculo">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Diagnostico</mat-label>
+      <input matInput formControlName="diagnostico">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Mecanico</mat-label>
+      <input matInput formControlName="mecanico">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="estado">
+        <mat-option *ngFor="let estado of estados" [value]="estado">{{ estado }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Guardar</button>
+  </form>
