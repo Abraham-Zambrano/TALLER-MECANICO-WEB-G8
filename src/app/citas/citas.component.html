@@ -1,1 +1,62 @@
-<p>citas works!</p>
+<div style="padding: 20px;">
+    <mat-toolbar color="primary" style="border-radius: 8px; margin-bottom: 20px;">
+        <span style="font-size: 30px; font-weight: 500;">Agenda de Citas</span>
+        <span class="spacer"></span>
+        <button mat-icon-button class="boton-ancho" (click)="irAHome()">
+          Inicio
+        </button>
+        <button mat-icon-button color="accent" class="boton-ancho" (click)="abrirDialogoCita()">
+          Nueva cita
+        </button>
+    </mat-toolbar>
+  
+    <table mat-table [dataSource]="citas" class="mat-elevation-z8" style="width: 100%;">
+
+        <!-- Columnas -->
+        <ng-container matColumnDef="cliente">
+          <th mat-header-cell *matHeaderCellDef> Cliente </th>
+          <td mat-cell *matCellDef="let cita"> {{cita.cliente}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef> Fecha </th>
+          <td mat-cell *matCellDef="let cita"> {{cita.fecha}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="hora">
+          <th mat-header-cell *matHeaderCellDef> Hora </th>
+          <td mat-cell *matCellDef="let cita"> {{cita.hora}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="servicio">
+          <th mat-header-cell *matHeaderCellDef> Servicio </th>
+          <td mat-cell *matCellDef="let cita"> {{cita.servicio}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="tecnico">
+          <th mat-header-cell *matHeaderCellDef> Técnico </th>
+          <td mat-cell *matCellDef="let cita"> {{cita.tecnico}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let cita"> {{cita.estado}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let cita">
+              <button mat-icon-button color="accent" class="boton-ancho" (click)="abrirDialogoCita(cita)">
+                edit
+              </button>
+              <button mat-icon-button color="warn" class="boton-ancho" (click)="eliminarCita(cita.id)">
+                delete
+              </button>
+            </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="['cliente', 'fecha', 'hora', 'servicio', 'tecnico', 'estado', 'acciones']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['cliente', 'fecha', 'hora', 'servicio', 'tecnico', 'estado', 'acciones'];"></tr>
+      </table>
+  </div>
+  
